@@ -1,6 +1,6 @@
 export const Fixture = (props: any) => {
   const { data } = props;
-  console.log(data);
+
   return (
     <div
       style={{
@@ -8,6 +8,7 @@ export const Fixture = (props: any) => {
         margin: 10,
       }}
     >
+      <div>{JSON.stringify(props.favIds)}</div>
       <div
         style={{
           flex: 1,
@@ -33,10 +34,11 @@ export const Fixture = (props: any) => {
           <span>{data.league.name}</span>
           <span
             style={{
-              backgroundColor: props.isFav ? "black" : "gold",
+              backgroundColor: props.favIds[data.fixture.id] ? "black" : "gold",
               padding: 5,
               borderRadius: 20,
             }}
+            onClick={() => props.addToFav(data.fixture.id)}
           >
             Fav
           </span>
