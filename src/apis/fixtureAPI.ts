@@ -1,12 +1,15 @@
-export const getMatches = (data: Object) => {
-  return null;
-};
+import { BASE_URL } from "../constants/BASE_URL";
 
-fetch("URL_GOES_HERE", {
-  method: "post",
-  headers: new Headers({
-    Authorization: "Basic " + btoa("username:password"),
-    "Content-Type": "application/x-www-form-urlencoded",
-  }),
-  body: "A=1&B=2",
-});
+export const getMatches = () => {
+  return fetch(BASE_URL + "/fixtures", {
+    method: "GET",
+    headers: new Headers({
+      Authorization: "Bearer " + "oB5i2lAnkoCo4dLd8pI1avSLsiee9unDteaSdrgnco",
+      "Content-Type": "application/json",
+    }),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      return data.response;
+    });
+};

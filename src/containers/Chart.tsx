@@ -1,30 +1,24 @@
-import React from "react";
-import { BASE_URL } from "../constants/BASE_URL";
-class Chart extends React.Component {
-  //   const [fixtures, setFixture] = useState([]);
-  //   useEffect(() => {
+import { useState, useEffect } from "react";
+import { getMatches } from "../apis/fixtureAPI";
+import { Fixture } from "../components/Fixture";
 
-  componentDidMount() {
-    fetch(BASE_URL + "/fixtures", {
-      method: "GET",
-      headers: new Headers({
-        Authorization: "Bearer " + "oB5i2lAnkoCo4dLd8pI1avSLsiee9unDteaSdrgnco",
-        "Content-Type": "application/x-www-form-urlencoded",
-        // "Access-Control-Allow-Origin": "http://localhost:3000",
-        // "Access-Control-Allow-Credentials": "true",
-      }),
-    })
-      .then((response) => {
-        alert(JSON.stringify(response));
-        console.log(response.json());
-        // setFixture();
-      })
-      .catch((error) => {
-        alert(JSON.stringify("error"));
-      });
-  }
-  render() {
-    return <div></div>;
-  }
-}
-export default Chart;
+export const Chart = () => {
+  const [fixtures, setFixture] = useState([]);
+
+  useEffect(() => {
+    getMatches().then((data) => {
+      setFixture(data.slice(0, 6));
+    });
+  }, []);
+
+  return (
+    <div style={{ backgroundColor: "#EDF2FF", padding: 20 }}>
+      {fixtures.length > 0 &&
+        fixtures.map((item, index) => (
+          <div style={{ flexDirection: "row" }}>
+            <Fixture data={item} key={index} />
+          </div>
+        ))}
+    </div>
+  );
+};

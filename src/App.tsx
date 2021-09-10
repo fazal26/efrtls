@@ -1,13 +1,10 @@
 import "./App.css";
-import Chart from "./containers/Chart";
-import { Chart2 } from "./containers/Chart2";
+import { Chart } from "./containers/Chart";
 
 function App() {
   return (
     <div className="App">
-      {/* <Chart />
-       */}
-      <Chart2></Chart2>
+      <Chart />
     </div>
   );
 }
